@@ -1,5 +1,5 @@
 # YilinMusic
-> 基于React开发的在线音乐平台
+> 基于 React + TypeScript + Antd 开发的在线音乐平台
 
 
 
