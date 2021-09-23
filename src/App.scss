@@ -1,0 +1,104 @@
+@import '~antd/dist/antd.css';
+
+.App {
+    overflow: hidden;
+    &>header {
+        height         : 60px;
+        display        : flex;
+        flex-direction : column;
+        justify-content: center;
+
+        .logo {
+            font-size     : 22px;
+            // text-align: center;
+            letter-spacing: 3px;
+        }
+
+        .search-wrapper {
+            height: 40px;
+
+            &>div {
+                width      : 400px;
+                height     : 100%;
+                display    : flex;
+                align-items: center;
+
+                &>span {
+                    border-radius: 24px;
+                }
+            }
+        }
+    }
+
+    &>main {
+        .menu-wrapper {
+            max-height: calc(100vh - 60px);
+            overflow-y: auto;
+            overflow-x: hidden;
+            border      : 1px solid #f0f0f0;
+            border-right: none;
+        }
+
+        .view-wrapper {
+            max-height: calc(100vh - 60px);
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-right: 10px;
+        }
+    }
+}
+
+
+.container {
+    width : 1200px;
+    margin: 0 auto;
+}
+
+.anticon {
+    color: #999;
+}
+
+
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background: #CB356B;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #BD3F32, #CB356B);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #BD3F32, #CB356B);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+
+
+.ant-menu-item-selected {
+    color: #fff !important;
+
+    .anticon {
+        color: #fff;
+    }
+}
+
+.ant-menu-light .ant-menu-item:hover {
+    color           : rgba(0, 0, 0, .8);
+    background-color: rgba(0, 0, 0, .03);
+
+}
+
+::-webkit-scrollbar {
+    width:6px;
+    height:6px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(0,0,0,0.08);
+}
+::-webkit-scrollbar-track {/*滚动条里面轨道*/
+
+
+    border-radius: 10px;
+
+    background: #fff;
+
+}

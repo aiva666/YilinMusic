@@ -1,10 +1,226 @@
-import React from 'react';
-import './App.css';
+import React, { FC, useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
+import routerConfig from './routes/index'
+import { Input, Row, Col, Menu } from 'antd';
+import {
+  SearchOutlined,
+  AppstoreOutlined,
+  BarsOutlined,
+  TagsOutlined,
+  FolderOutlined,
+  UserOutlined,
+  HistoryOutlined,
+  FlagOutlined,
+  CustomerServiceOutlined,
+} from '@ant-design/icons';
 
-function App() {
+import "./App.scss"
+
+interface MenuConfigType {
+  id: number | string,
+  title: number | string,
+  key: string,
+  icon?: any,
+  children?: MenuConfigType[],
+}
+
+const App: FC = () => {
+
+  const menuConfig: MenuConfigType[] = [
+    {
+      id: "1",
+      title: "个性推荐",
+      key: "/recommended",
+      icon: <AppstoreOutlined />,
+    },
+    {
+      id: "2",
+      title: "排行榜",
+      key: "/ranking-list",
+      icon: <BarsOutlined />,
+    },
+    {
+      id: "3",
+      title: "最新音乐",
+      key: "/latest-music",
+      icon: <TagsOutlined />,
+    },
+    {
+      id: "4",
+      title: "歌单",
+      key: "/song-collection",
+      icon: <FolderOutlined />,
+    },
+    {
+      id: "5",
+      title: "歌手",
+      key: "/singer",
+      icon: <UserOutlined />,
+    },
+    {
+      id: "6",
+      title: "我的音乐",
+      key: "/6",
+      children: [
+        {
+          id: '6-1',
+          title: "最近播放",
+          key: "/6-1",
+          icon: <HistoryOutlined />,
+        },
+        {
+          id: '6-2',
+          title: "我的收藏",
+          key: "/6-2",
+          icon: <FlagOutlined />,
+        },
+      ],
+    },
+    {
+      id: "7",
+      title: "我的歌单",
+      key: "/7",
+      children: [
+        {
+          id: '7-1',
+          title: "Zoom~Zoom",
+          key: "/7-1",
+          icon: <CustomerServiceOutlined />,
+        },
+        {
+          id: '7-2',
+          title: "Accompany",
+          key: "/7-2",
+          icon: <CustomerServiceOutlined />,
+        },
+        {
+          id: '7-3',
+          title: "愿世间所有的相遇都是久别重逢",
+          key: "/7-3",
+          icon: <CustomerServiceOutlined />,
+        },
+        {
+          id: '7-4',
+          title: "90年代华语金曲TOP100",
+          key: "/7-4",
+          icon: <CustomerServiceOutlined />,
+        },
+        {
+          id: '7-5',
+          title: "云音乐电音榜",
+          key: "/7-5",
+          icon: <CustomerServiceOutlined />,
+        },
+        {
+          id: '7-6',
+          title: "网易云评论最多电音TOP100",
+          key: "/7-6",
+          icon: <CustomerServiceOutlined />,
+        },
+      ],
+    },
+
+  ]
+
+  // 重定向路由
+  let [redirectRouters, setRedirectRouters] = useState<RouterParams[]>([])
+  // 页面路由
+  let [pageRouters, setPageRouters] = useState<RouterParams[]>([])
+
+
+  // 获取重定向路由
+  const initRedirectRouter = (arr: Array<RouterParams>): void => {
+    let redirectArray: Array<RouterParams> = []
+    let pageArray: Array<RouterParams> = []
+    arr.forEach((item => {
+      if (typeof item.redirect === "string") {
+        redirectArray.push(item)
+      } else if (item.name && item.path && item.component) {
+        pageArray.push(item)
+      }
+    }))
+    setRedirectRouters(redirectArray)
+    setPageRouters(pageArray)
+  }
+
+  // 菜单点击事件
+  const menuChangeHandler = (key: string): void => {
+
+  }
+
+  useEffect(() => {
+    initRedirectRouter(routerConfig)
+  }, [])
+
   return (
     <div className="App">
-      <h1>YilinMusic</h1>
+      <header>
+        <div className="container">
+          <Row gutter={30}>
+            <Col span={5}>
+              <div className="logo">YiLinMusic</div>
+            </Col>
+            <Col span={19}>
+              <div className="search-wrapper">
+                <div>
+                  <Input size="middle" allowClear suffix={<SearchOutlined />} />
+                </div>
+              </div>
+
+            </Col>
+          </Row>
+        </div>
+      </header>
+      <main>
+        <div className="container">
+          <Row gutter={30}>
+            <Col span={5}>
+              <div className="menu-wrapper">
+                <Menu defaultSelectedKeys={['/recommended']} onClick={({ key }) => { menuChangeHandler(key) }}>
+                  {
+                    menuConfig.map(item => {
+                      return (
+                        item.children ?
+                          <Menu.ItemGroup key={item.key} title={item.title}>
+                            {
+                              item.children.map(i => {
+                                return <Menu.Item key={i.key} icon={i.icon}>{i.title}</Menu.Item>
+                              })
+                            }
+                          </Menu.ItemGroup>
+                          :
+                          <Menu.Item key={item.key} icon={item.icon}>{item.title}</Menu.Item>
+
+                      )
+                    })
+                  }
+
+                </Menu>
+              </div>
+            </Col>
+            <Col span={19}>
+              <div className="view-wrapper">
+                <Router>
+
+                  {
+                    /* 重定向路由 */
+                    redirectRouters.map((item, index) => {
+                      return item.redirect ? <Redirect key={index} exact={item.exact} from={item.path} to={item.redirect} /> : null
+                    })
+                  }
+
+                  {
+                    // 页面路由
+                    pageRouters.map((item, index) => {
+                      return  <Route key={index} path={item.path} component={item.component} exact={item.exact} strict={item.strict} />
+                    })
+                  }
+                </Router>
+              </div>
+            </Col>
+          </Row>
+        </div>
+      </main>
     </div>
   );
 }

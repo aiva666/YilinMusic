@@ -1,0 +1,26 @@
+.card-image {
+    width   : 100%;
+    position: relative;
+
+    .play-count {
+        position   : absolute;
+        right      : 6px;
+        top        : 0;
+        color      : #fff;
+        line-height: 20px;
+        font-size  : 12px;
+    }
+
+    img {
+        width        : 100%;
+        border-radius: 4px;
+    }
+}
+
+.card-title {
+    margin-top        : 6px;
+    display           : -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow          : hidden;
+}
