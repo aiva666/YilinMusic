@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-23 11:02:35
  * @LastEditors: Aiva
- * @LastEditTime: 2021-09-23 15:56:44
+ * @LastEditTime: 2021-09-24 10:08:34
  * @FilePath: \yilin-music\src\Mock\index.ts
  */
 import Mock,{Random} from 'mockjs'
@@ -39,7 +39,7 @@ Mock.mock("/api/recommended/banner", "get", (ops: any) => {
 // 推荐歌单
 Mock.mock("/api/recommended/song-collection", "get", (ops: any) => {
     return mockResponse({
-        "data|20": [
+        "data|18": [
             {
                 id: "@id",
                 title:"@title",

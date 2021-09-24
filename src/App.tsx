@@ -1,5 +1,5 @@
-import React, { FC, useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
+import React, { FC, useState, useEffect, ComponentProps } from 'react';
+import { Route, Redirect, Switch,Link } from 'react-router-dom'
 import routerConfig from './routes/index'
 import { Input, Row, Col, Menu } from 'antd';
 import {
@@ -24,7 +24,7 @@ interface MenuConfigType {
   children?: MenuConfigType[],
 }
 
-const App: FC = () => {
+const App: FC = (props: any) => {
 
   const menuConfig: MenuConfigType[] = [
     {
@@ -113,8 +113,32 @@ const App: FC = () => {
         },
         {
           id: '7-6',
-          title: "网易云评论最多电音TOP100",
+          title: "云音乐摇滚榜",
           key: "/7-6",
+          icon: <CustomerServiceOutlined />,
+        },
+        {
+          id: '7-7',
+          title: "云音乐民谣榜",
+          key: "/7-7",
+          icon: <CustomerServiceOutlined />,
+        },
+        {
+          id: '7-8',
+          title: "云音乐古风榜",
+          key: "/7-8",
+          icon: <CustomerServiceOutlined />,
+        },
+        {
+          id: '7-9',
+          title: "云音乐民谣榜",
+          key: "/7-9",
+          icon: <CustomerServiceOutlined />,
+        },
+        {
+          id: '7-10',
+          title: "云音乐ACG榜",
+          key: "/7-10",
           icon: <CustomerServiceOutlined />,
         },
       ],
@@ -145,7 +169,7 @@ const App: FC = () => {
 
   // 菜单点击事件
   const menuChangeHandler = (key: string): void => {
-
+    // props.history.push(key)
   }
 
   useEffect(() => {
@@ -184,12 +208,12 @@ const App: FC = () => {
                           <Menu.ItemGroup key={item.key} title={item.title}>
                             {
                               item.children.map(i => {
-                                return <Menu.Item key={i.key} icon={i.icon}>{i.title}</Menu.Item>
+                                return <Menu.Item key={i.key} icon={i.icon}><Link to={i.key}>{i.title}</Link></Menu.Item>
                               })
                             }
                           </Menu.ItemGroup>
                           :
-                          <Menu.Item key={item.key} icon={item.icon}>{item.title}</Menu.Item>
+                          <Menu.Item key={item.key} icon={item.icon}><Link to={item.key}>{item.title}</Link></Menu.Item>
 
                       )
                     })
@@ -200,22 +224,21 @@ const App: FC = () => {
             </Col>
             <Col span={19}>
               <div className="view-wrapper">
-                <Router>
 
-                  {
-                    /* 重定向路由 */
-                    redirectRouters.map((item, index) => {
-                      return item.redirect ? <Redirect key={index} exact={item.exact} from={item.path} to={item.redirect} /> : null
-                    })
-                  }
-
+                {
+                  /* 重定向路由 */
+                  redirectRouters.map((item, index) => {
+                    return item.redirect ? <Redirect key={index} exact={item.exact} from={item.path} to={item.redirect} /> : null
+                  })
+                }
+                <Switch>
                   {
                     // 页面路由
                     pageRouters.map((item, index) => {
-                      return  <Route key={index} path={item.path} component={item.component} exact={item.exact} strict={item.strict} />
+                      return <Route key={index} path={item.path} component={item.component} exact={item.exact} strict={item.strict} />
                     })
                   }
-                </Router>
+                </Switch>
               </div>
             </Col>
           </Row>

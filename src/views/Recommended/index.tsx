@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-23 09:58:36
  * @LastEditors: Aiva
- * @LastEditTime: 2021-09-23 15:53:11
+ * @LastEditTime: 2021-09-24 10:07:49
  * @FilePath: \yilin-music\src\views\Recommended\index.tsx
  */
 import React, { useState, useEffect } from 'react';
@@ -60,7 +60,7 @@ const Recommended = () => {
                     {
                         collection.map((item:any) => {
                             return (
-                                <Col span={6} key={item.id} style={{marginBottom:16}}>
+                                <Col span={4} key={item.id} style={{marginBottom:16}}>
                                     <Card title={item.title} image={item.image} count={item.count} />
                                 </Col>
                             )

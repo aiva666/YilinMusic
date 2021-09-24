@@ -2,6 +2,7 @@
 
 .App {
     overflow: hidden;
+
     &>header {
         height         : 60px;
         display        : flex;
@@ -32,17 +33,27 @@
 
     &>main {
         .menu-wrapper {
-            max-height: calc(100vh - 60px);
-            overflow-y: auto;
-            overflow-x: hidden;
             border      : 1px solid #f0f0f0;
             border-right: none;
+
+            &>ul {
+                max-height   : calc(100vh - 100px);
+                overflow     : hidden;
+                padding-right: 2px;
+                &:hover {
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                }
+                .ant-menu-item {
+                    width: 216px;
+                }
+            }
         }
 
         .view-wrapper {
-            max-height: calc(100vh - 60px);
-            overflow-y: auto;
-            overflow-x: hidden;
+            max-height   : calc(100vh - 100px);
+            overflow-y   : auto;
+            overflow-x   : hidden;
             padding-right: 10px;
         }
     }
@@ -75,26 +86,40 @@
 .ant-menu-item-selected {
     color: #fff !important;
 
+    a {
+        color: #fff !important;
+
+        &:hover {
+            color: #fff !important;
+        }
+    }
+
     .anticon {
         color: #fff;
     }
 }
 
 .ant-menu-light .ant-menu-item:hover {
-    color           : rgba(0, 0, 0, .8);
     background-color: rgba(0, 0, 0, .03);
+}
+
+.ant-menu-item a:hover {
+    color: rgba(0, 0, 0, .8);
 
 }
 
 ::-webkit-scrollbar {
-    width:6px;
-    height:6px;
+    width : 6px;
+    height: 6px;
 }
+
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: rgba(0,0,0,0.08);
+    background   : rgba(0, 0, 0, 0.08);
 }
-::-webkit-scrollbar-track {/*滚动条里面轨道*/
+
+::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
 
 
     border-radius: 10px;
