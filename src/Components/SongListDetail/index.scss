@@ -1,0 +1,68 @@
+.rankDetail {
+    color: #424242;
+
+    &>header {
+        display: flex;
+
+        .view-icon {
+            &>div {
+                width           : 186px;
+                height          : 186px;
+                background-color: #d0344e;
+                border-radius   : 6px;
+                text-align      : center;
+                line-height     : 170px;
+
+                span {
+                    font-size     : 30px;
+                    font-weight   : 500;
+                    color         : #fff;
+                    letter-spacing: 4px;
+                }
+            }
+        }
+
+        .view-desc {
+            margin-left    : 26px;
+            height         : 186px;
+            display        : flex;
+            flex-direction : column;
+            justify-content: space-between;
+
+            h2 {
+                span.view-title {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    &>main {
+        margin-top: 26px;
+
+        .ant-tabs-ink-bar {
+            display: none;
+        }
+
+        .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+            color    : #424242;
+            font-size: 22px;
+
+        }
+
+        .ant-tabs-tab .ant-tabs-tab-btn {
+            &:hover {
+                color: #424242;
+            }
+        }
+
+    }
+}
+
+.letter-left {
+    margin-left: 6px;
+}
+
+.normal-left {
+    margin-left: 12px;
+}

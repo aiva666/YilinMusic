@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-23 09:58:36
  * @LastEditors: Aiva
- * @LastEditTime: 2021-09-24 10:07:49
+ * @LastEditTime: 2021-10-13 10:23:40
  * @FilePath: \yilin-music\src\views\Recommended\index.tsx
  */
 import React, { useState, useEffect } from 'react';
@@ -16,9 +16,13 @@ const Recommended = () => {
 
     let { getSwiperList,getCollectionList } = recommendedApi
 
+    // 轮播图数据
     const [swiperList, setSwiperList] = useState([])
+
+    // 推荐歌单数据
     const [collection, setCollection] = useState([])
 
+    // 获取轮播图数据
     const getSwiper = async () => {
         let res = await getSwiperList()
         if (res) {
@@ -26,6 +30,7 @@ const Recommended = () => {
         }
     }
 
+    // 获取推荐歌单数据
     const getCollection = async () => {
         let res = await getCollectionList()
         if (res) {
@@ -33,6 +38,7 @@ const Recommended = () => {
         }
     }
 
+    // 页面数据初始化
     useEffect(() => {
         getSwiper()
         getCollection()

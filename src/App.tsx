@@ -26,6 +26,8 @@ interface MenuConfigType {
 
 const App: FC = (props: any) => {
 
+
+  // 菜单配置
   const menuConfig: MenuConfigType[] = [
     {
       id: "1",

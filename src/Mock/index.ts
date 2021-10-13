@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-23 11:02:35
  * @LastEditors: Aiva
- * @LastEditTime: 2021-09-24 10:08:34
+ * @LastEditTime: 2021-10-13 14:27:43
  * @FilePath: \yilin-music\src\Mock\index.ts
  */
 import Mock,{Random} from 'mockjs'
@@ -17,7 +17,7 @@ const mockResponse = (template: any) => {
 // 个性推荐-------------------------------
 
 // 轮播图
-Mock.mock("/api/recommended/banner", "get", (ops: any) => {
+Mock.mock("/api/home/recommended/banner", "get", (ops: any) => {
     return mockResponse({
         "data|6": [
             {
@@ -37,13 +37,36 @@ Mock.mock("/api/recommended/banner", "get", (ops: any) => {
 })
 
 // 推荐歌单
-Mock.mock("/api/recommended/song-collection", "get", (ops: any) => {
+Mock.mock("/api/home/recommended/song-collection", "get", (ops: any) => {
     return mockResponse({
         "data|18": [
             {
                 id: "@id",
-                title:"@title",
+                title:"@ctitle",
                 "image":"https://p4.music.126.net/a6VPApB8BSgcwlmT2RUOEA==/109951166432539305.jpg"
+            }
+        ]
+    })
+})
+
+
+// 排行榜-------------------------------
+
+// 排行榜列表
+Mock.mock("/api/home/ranking/lastest", "get", (ops: any) => {
+    return mockResponse({
+        "data|4": [
+            {
+                id: "@id",
+                title:"@ctitle(3)",
+                updateTime:"@date(MM月dd日)",
+                "list|5":[
+                    {
+                        song_name:"@ctitle",
+                        singer:"@name",
+                        id:"@id",
+                    }
+                ]
             }
         ]
     })
