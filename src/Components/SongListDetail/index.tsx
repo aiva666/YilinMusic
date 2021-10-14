@@ -1,105 +1,150 @@
 /*
  * @Date: 2021-10-13 15:03:43
  * @LastEditors: Aiva
- * @LastEditTime: 2021-10-13 16:36:20
+ * @LastEditTime: 2021-10-14 16:40:42
  * @FilePath: \yilin-music\src\Components\SongListDetail\index.tsx
  */
-import React, { FC } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Tag, Avatar, Button, Tabs,Input,Table } from 'antd'
-import { CaretRightOutlined, PlusSquareOutlined, ShareAltOutlined,SearchOutlined } from '@ant-design/icons';
-
+import { Tag, Avatar, Button, Tabs, Input, Table } from 'antd'
+import { CaretRightOutlined, PlusSquareOutlined, ShareAltOutlined, SearchOutlined,HeartOutlined } from '@ant-design/icons';
+import { getRankingList } from '../../openApi/index'
+import {numberToCapitalString} from '../../utils/index'
 import "./index.scss"
+
 
 const { TabPane } = Tabs;
 
 
-const rankDetail: FC = () => {
+const SongListDetail: FC = () => {
+
+    let defaultSongListInfo: SongListDetailResponseType = {
+        id: "",
+        title: "",
+        cover_img:"",
+        create_data: "",
+        create_user_info: {
+            avatar:"",
+            name:""
+        },
+        collection_num: 0,
+        share_num: 0,
+        tags: [],
+        songNum: 0,
+        play_count: 0,
+        desc: "",
+        comment_count: 0,
+        list: []
+    }
+    const [songListInfo, setSongListInfo] = useState(defaultSongListInfo)
 
     const tableColumns = [
         {
-            title:"",
-            dataIndex:'index',
-            width:50,
+            title: "",
+            dataIndex: 'id',
+            width: 50,
+            align:"center" as "center",
+            render(text:string,record:any,index:number) {
+                return index + 1
+            }
         },
         {
-            title:"操作",
-            dataIndex:'action',
-            width:60,
+            title: "操作",
+            dataIndex: 'action',
+            width: 50,
+            align:"center" as "center",
+            render(text:string,record:any,index:number) {
+                return <HeartOutlined />
+            }
         },
         {
-            title:"标题",
-            dataIndex:'song_name',
+            title: "标题",
+            width: 360,
+            dataIndex: 'song_name',
+            className:"song_title",
+
         },
         {
-            title:"歌手",
-            dataIndex:'song_singer',
+            title: "歌手",
+            dataIndex: 'song_singer',
         },
         {
-            title:"专辑",
-            dataIndex:'song_album',
+            title: "专辑",
+            dataIndex: 'song_album',
         },
         {
-            title:"时间",
-            dataIndex:'song_time',
+            title: "时间",
+            align:"center" as "center",
+            dataIndex: 'song_time',
         },
-        
+
     ]
 
+    const getTableData = async () => {
+        let res = await getRankingList('xxx')
+        if (res) {
+            setSongListInfo(res.data)
+        }
+    }
+
+    useEffect(() => {
+        getTableData()
+    }, [])
+
+
     const rightExtra = (
-        <Input style={{borderRadius:24}}  placeholder="搜索歌单音乐" allowClear suffix={<SearchOutlined />} />
+        <Input style={{ borderRadius: 24 }} placeholder="搜索歌单音乐" allowClear suffix={<SearchOutlined />} />
     )
 
     return (
         <div className="rankDetail">
             <header>
                 <div className="view-icon">
-                    <div>
-                        <span>热歌榜</span>
-                    </div>
+                    <div style={{backgroundImage:`url(${songListInfo.cover_img})`}}></div>
                 </div>
                 <div className="view-desc">
                     <h2>
                         <Tag color="red">歌单</Tag>
-                        <span className="view-title">热歌榜</span>
+                        <span className="view-title">{songListInfo.title}</span>
                     </h2>
                     <div>
                         <Avatar size="small" />
-                        <Link to="/" className="normal-left">网易云音乐</Link>
-                        <span className="normal-left">2020-01-02创建</span>
+                        <Link to="/" className="normal-left">{songListInfo.create_user_info.name}</Link>
+                        <span className="normal-left">{songListInfo.create_data}创建</span>
                     </div>
                     <div>
                         <Button style={{ background: "#d0344e", boxShadow: "unset", borderColor: "#d0344e" }} type="primary" danger shape="round" icon={<CaretRightOutlined style={{ color: "#fff" }} />}>播放全部</Button>
-                        <Button className="normal-left" shape="round" icon={<PlusSquareOutlined />}>已收藏（2万）</Button>
-                        <Button className="normal-left" shape="round" icon={<ShareAltOutlined />}>分享（2万）</Button>
+                        <Button className="normal-left" shape="round" icon={<PlusSquareOutlined />}>已收藏（{numberToCapitalString(songListInfo.collection_num)}）</Button>
+                        <Button className="normal-left" shape="round" icon={<ShareAltOutlined />}>分享（{numberToCapitalString(songListInfo.share_num)}）</Button>
                     </div>
                     <div>
                         <span>标签：</span>
                         <span>
-                            <Link to="/">华语</Link>
-                            <span> / </span>
-                            <Link to="/">粤语</Link>
-                            <span> / </span>
-
-                            <Link to="/">经典</Link>
+                            {
+                                songListInfo.tags.map((item,index) => {
+                                    return (
+                                        <Link to="/" key={item.id}> <i>{index === 0 ? "" : ' / '}</i> {item.title}</Link>
+                                    )
+                                })
+                            }
                         </span>
                     </div>
                     <div>
-                        <span>歌曲：99</span>
-                        <span className="normal-left">播放：60万</span>
+                        <span>歌曲：{songListInfo.play_count}</span>
+                        <span className="normal-left">播放：{numberToCapitalString(songListInfo.play_count)}</span>
                     </div>
                     <div>
                         <span>简介：</span>
-                        <span>云音乐中每天热度上升最快的100首单曲，每日更新。</span>
+                        <span>{songListInfo.desc}</span>
                     </div>
                 </div>
             </header>
             <main>
-                <Tabs defaultActiveKey="list" tabBarExtraContent={{right:rightExtra}} >
+                <Tabs defaultActiveKey="list" tabBarExtraContent={{ right: rightExtra }} >
                     <TabPane tab="歌曲列表" key="list">
-                        <Table dataSource={[]} columns={tableColumns} />
+                        <Table className="songListDetail-table" rowClassName="songListDetail-tableRow" rowKey="id" size="small" pagination={false} dataSource={songListInfo.list} columns={tableColumns} />
                     </TabPane>
-                    <TabPane tab="评论（20170613）" key="comment">
+                    <TabPane tab={`评论（${numberToCapitalString(songListInfo.comment_count)})`} key="comment">
                         Content of Tab Pane 2
                     </TabPane>
                 </Tabs>
@@ -108,4 +153,4 @@ const rankDetail: FC = () => {
     )
 }
 
-export default rankDetail
+export default SongListDetail

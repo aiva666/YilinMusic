@@ -8,17 +8,11 @@
             &>div {
                 width           : 186px;
                 height          : 186px;
-                background-color: #d0344e;
+                background: #d0344e no-repeat 100% 100%/cover;
                 border-radius   : 6px;
                 text-align      : center;
                 line-height     : 170px;
-
-                span {
-                    font-size     : 30px;
-                    font-weight   : 500;
-                    color         : #fff;
-                    letter-spacing: 4px;
-                }
+                position: relative;
             }
         }
 
@@ -33,6 +27,11 @@
                 span.view-title {
                     font-weight: bold;
                 }
+            }
+
+            i {
+                font-style: normal;
+                color     : #333;
             }
         }
     }
@@ -55,6 +54,50 @@
                 color: #424242;
             }
         }
+        .ant-tabs-tab:hover {
+            color:#424242;
+        }
+        .ant-tabs-nav::before {
+            border:none;
+        }
+
+        .songListDetail-table {
+            th {
+                border:none;
+                background-color: #fff !important;
+                color: rgb(150, 150, 150);
+
+                &::before {
+                    display: none;
+                }
+            }
+            .songListDetail-tableRow {
+                * {
+                    color: rgb(150, 150, 150);
+                }
+
+                .song_title {
+                    color: #333;
+                }
+
+                &:hover td {
+                    background-color: rgb(240, 241, 242) !important;
+                }
+
+                &:nth-of-type(odd) {
+                    background-color: #f9f9f9;
+                }
+
+                &:nth-of-type(even) {
+                    background-color: #fff;
+                }
+
+                .ant-table-cell {
+                    border: none;
+                }
+            }
+        }
+
 
     }
 }

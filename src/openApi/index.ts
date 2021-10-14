@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-23 10:51:10
  * @LastEditors: Aiva
- * @LastEditTime: 2021-10-13 16:41:31
+ * @LastEditTime: 2021-10-14 14:26:07
  * @FilePath: \yilin-music\src\openApi\index.ts
  */
 
@@ -27,4 +27,9 @@ export const rankingApi = {
     getRankingList() {
         return Axios("/api/home/ranking/lastest")
     },
+}
+
+// 根据歌单ID获取歌单详情
+export const getRankingList = (id:string) => {
+    return Axios("/api/home/getSongCollectionDetail")
 }
