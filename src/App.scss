@@ -1,12 +1,20 @@
 @import '~antd/dist/antd.css';
+$primaryColor:#d0344e;
 
+html {
+    --antd-wave-shadow-color:$primaryColor;
+}
 blockquote, body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, hr, input, legend, li, ol, p, pre, td, textarea, th, ul {
     margin: 0;
     padding: 0;
 }
+ul {
+    list-style: none;
+}
 a {
     color:rgb(11,88,176);
 }
+
 
 .App {
     overflow: hidden;
@@ -76,6 +84,15 @@ a {
 .anticon {
     color: #999;
 }
+.clearfix::after {
+    content:"";
+    display: block;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    clear: both;
+}
 
 
 
@@ -134,4 +151,14 @@ a {
 
     background: #fff;
 
+}
+
+.ant-btn:hover,
+.ant-btn:active {
+    color:$primaryColor;
+    border-color: $primaryColor;
+}
+.ant-btn:focus {
+    color: rgba(0, 0, 0, 0.85);
+    border-color: #d9d9d9;
 }

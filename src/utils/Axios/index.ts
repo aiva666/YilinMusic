@@ -1,7 +1,7 @@
 
 import Axios from 'axios'
 
-import envInfo from '../envConst'
+// import envInfo from '../envConst'
 import {message} from 'antd'
 
 Axios.defaults.timeout = 5000

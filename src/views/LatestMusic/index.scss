@@ -1,0 +1,90 @@
+.latest-music {
+    header {
+        ul {
+            li {
+                display     : inline-block;
+                margin-right: 20px;
+                cursor      : pointer;
+
+                &.active {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    main {
+        margin-top: 16px;
+        ul {
+            li {
+                &:nth-of-type(even)>div {
+                    background-color: #f9f9f9;
+                }
+                &>div {
+                    display         : flex;
+                    justify-content : space-between;
+                    align-items     : center;
+                    height          : 80px;
+                    line-height     : 80px;
+                    color           : #969696;
+                    background-color: #fff;
+                    
+                    &:hover {
+                        background-color: #f0f1f2;
+                    }
+                    .index {
+                        width: 50px;
+                        text-align: center;
+                    }
+
+                    .song-cover {
+                        position     : relative;
+                        width        : 60px;
+                        height       : 60px;
+                        border-radius: 4px;
+                        background   : no-repeat 100% 100%/cover;
+                        cursor: pointer;
+                        &::after {
+                            content         : "";
+                            position        : absolute;
+                            top             : 0;
+                            left            : 0;
+                            right           : 0;
+                            bottom          : 0;
+                            background-color: rgba(0, 0, 0,.08);
+                        }
+                        img {
+                            width: 24px;
+                            height: 24px;
+                            position: absolute;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            top: 0;
+                            margin: auto;
+                        }
+                    }
+
+                    .song-name {
+                        width: calc(100% - 50px - 60px - 100px - 180px - 80px);
+                        padding-left: 16px;
+                        color: #333;
+                    }
+
+                    .singer {
+                        width:100px;
+                    }
+
+                    .song-album {
+                        width: 180px;
+                    }
+
+                    .song-time {
+                        width:80px;
+                    }
+                }
+            }
+            
+        }
+    }
+}

@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-24 10:27:53
  * @LastEditors: Aiva
- * @LastEditTime: 2021-10-13 15:00:22
+ * @LastEditTime: 2021-11-09 13:22:00
  * @FilePath: \yilin-music\src\views\RankingList\index.tsx
  */
 import React, { FC,useState,useEffect } from 'react'

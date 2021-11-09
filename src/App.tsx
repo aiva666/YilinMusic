@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, ComponentProps } from 'react';
+import React, { FC, useState, useEffect, } from 'react';
 import { Route, Redirect, Switch,Link } from 'react-router-dom'
 import routerConfig from './routes/index'
 import { Input, Row, Col, Menu } from 'antd';
@@ -24,7 +24,7 @@ interface MenuConfigType {
   children?: MenuConfigType[],
 }
 
-const App: FC = (props: any) => {
+const App: FC = () => {
 
 
   // 菜单配置
