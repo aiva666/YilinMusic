@@ -1,13 +1,14 @@
 /*
  * @Date: 2021-10-13 15:03:43
  * @LastEditors: Aiva
- * @LastEditTime: 2021-10-14 16:40:42
+ * @LastEditTime: 2021-11-11 09:26:25
  * @FilePath: \yilin-music\src\Components\SongListDetail\index.tsx
  */
 import React, { FC, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Tag, Avatar, Button, Tabs, Input, Table } from 'antd'
 import { CaretRightOutlined, PlusSquareOutlined, ShareAltOutlined, SearchOutlined,HeartOutlined } from '@ant-design/icons';
+import SongTable from '../SongTable'
 import { getRankingList } from '../../openApi/index'
 import {numberToCapitalString} from '../../utils/index'
 import "./index.scss"
@@ -38,47 +39,7 @@ const SongListDetail: FC = () => {
     }
     const [songListInfo, setSongListInfo] = useState(defaultSongListInfo)
 
-    const tableColumns = [
-        {
-            title: "",
-            dataIndex: 'id',
-            width: 50,
-            align:"center" as "center",
-            render(text:string,record:any,index:number) {
-                return index + 1
-            }
-        },
-        {
-            title: "操作",
-            dataIndex: 'action',
-            width: 50,
-            align:"center" as "center",
-            render(text:string,record:any,index:number) {
-                return <HeartOutlined />
-            }
-        },
-        {
-            title: "标题",
-            width: 360,
-            dataIndex: 'song_name',
-            className:"song_title",
-
-        },
-        {
-            title: "歌手",
-            dataIndex: 'song_singer',
-        },
-        {
-            title: "专辑",
-            dataIndex: 'song_album',
-        },
-        {
-            title: "时间",
-            align:"center" as "center",
-            dataIndex: 'song_time',
-        },
-
-    ]
+    
 
     const getTableData = async () => {
         let res = await getRankingList('xxx')
@@ -142,7 +103,8 @@ const SongListDetail: FC = () => {
             <main>
                 <Tabs defaultActiveKey="list" tabBarExtraContent={{ right: rightExtra }} >
                     <TabPane tab="歌曲列表" key="list">
-                        <Table className="songListDetail-table" rowClassName="songListDetail-tableRow" rowKey="id" size="small" pagination={false} dataSource={songListInfo.list} columns={tableColumns} />
+                        <SongTable data={songListInfo.list} />
+                        {/* <Table className="songListDetail-table" rowClassName="songListDetail-tableRow" rowKey="id" size="small" pagination={false} dataSource={songListInfo.list} columns={tableColumns} /> */}
                     </TabPane>
                     <TabPane tab={`评论（${numberToCapitalString(songListInfo.comment_count)})`} key="comment">
                         Content of Tab Pane 2

@@ -1,0 +1,55 @@
+.singer-wrapper {
+    header {
+        ul {
+            li {
+                display  : flex;
+                font-size: 12px;
+
+                .item-l {
+                    width: 40px;
+                }
+
+                .item-r {
+                    width      : calc(100% - 40px);
+                    display    : flex;
+                    flex-wrap  : wrap;
+                    align-items: center;
+
+                    .item-tag {
+                        position     : relative;
+                        width        : 80px;
+                        text-align   : center;
+                        margin-bottom: 10px;
+                        cursor: pointer;
+                        user-select: none;
+                        &>span {
+                            display: inline-block;
+                            padding: 2px 10px;
+                        }
+
+                        &.active span {
+                            color           : #d03443;
+                            background-color: rgb(254, 246, 246);
+                            border-radius: 24px;
+                        }
+
+                        &::after {
+                            content : "|";
+                            position: absolute;
+                            top     : 0;
+                            right   : 0;
+                            color   : #ddd;
+                        }
+
+                        &:last-of-type::after {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    main {
+        margin-top: 26px;
+    }
+}

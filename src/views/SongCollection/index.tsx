@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-10-26 13:39:54
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-09 15:32:59
+ * @LastEditTime: 2021-11-10 10:06:29
  * @FilePath: \yilin-music\src\views\SongCollection\index.tsx
  */
 import React, { FC, useState, useEffect, } from 'react'
@@ -50,7 +50,6 @@ const SongCollection: FC = () => {
     const getSongCardList = async (id: string) => {
         let res = await getSongCollectionById(id)
         if (res) {
-            console.log(res)
             setSongCardInfo(res.data)
         }
     }

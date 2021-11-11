@@ -1,0 +1,82 @@
+.singerDetail {
+    &>header {
+        display: flex;
+
+        .view-icon {
+            &>div {
+                width        : 186px;
+                height       : 186px;
+                background   : #d0344e no-repeat 100% 100%/cover;
+                border-radius: 6px;
+                text-align   : center;
+                line-height  : 170px;
+                position     : relative;
+            }
+        }
+
+        .view-desc {
+            margin-left    : 26px;
+            height         : 186px;
+            display        : flex;
+            flex-direction : column;
+            justify-content: flex-start;
+
+            &>* {
+                margin-bottom: 10px;
+            }
+
+            h2 {
+                span.view-title {
+                    font-weight: bold;
+                }
+            }
+
+            i {
+                font-style: normal;
+                color     : #333;
+            }
+        }
+    }
+
+    main {
+        margin-top: 26px;
+
+        .album {
+            li {
+                display        : flex;
+                justify-content: space-between;
+                margin-bottom: 60px;
+                .l-img {
+                    width: 200px;
+
+                    img {
+                        width        : 150px;
+                        height       : 150px;
+                        border-radius: 4px;
+                    }
+
+                    p {
+                        color     : #666;
+                        margin-top: 2px;
+                    }
+                }
+
+                .r-list {
+                    flex-grow: 1;
+                    &>div {
+                        margin-bottom: 10px;
+                        span.title {
+                            font-size: 18px;
+                            font-weight: 600;
+                        }
+                        &>span.anticon {
+                            cursor: pointer;
+                            font-size: 18px;
+                            margin-left: 16px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

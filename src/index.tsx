@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom'
+import {ConfigProvider} from 'antd'
+import zhCN from 'antd/lib/locale/zh_CN';
 import './Mock/index'
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
+    <ConfigProvider locale={zhCN}>
       <App />
+      </ConfigProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')

@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-23 10:51:10
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-09 15:11:02
+ * @LastEditTime: 2021-11-11 10:07:39
  * @FilePath: \yilin-music\src\openApi\index.ts
  */
 
@@ -58,6 +58,24 @@ export const songCollection = {
     getSongCollectionById(id:string) {
         return Axios("/api/home/songCollection/getCollectionByTagId")
     },
+}
+
+// --------------------------------------------------------------------
+
+
+// 歌手
+
+export const singer = {
+    // 获取歌手列表
+    getSingerList() {
+        return Axios("/api/home/singer/list")
+    },
+
+    // 根据ID获取歌手详情
+    getSingeInfo() {
+        return Axios("/api/home/singer/getSingerInfoById")
+    },
+
 }
 
 // --------------------------------------------------------------------
