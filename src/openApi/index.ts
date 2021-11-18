@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-23 10:51:10
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-18 13:09:37
+ * @LastEditTime: 2021-11-18 14:44:28
  * @FilePath: \yilin-music\src\openApi\index.ts
  */
 
@@ -55,7 +55,7 @@ export const songCollection = {
         return Axios("/api/home/songCollection/classList")
     },
     // 根据分类ID获取歌单
-    getSongCollectionById(id:string) {
+    getSongCollectionById(id: string) {
         return Axios("/api/home/songCollection/getCollectionByTagId")
     },
 }
@@ -82,7 +82,7 @@ export const singer = {
 
 
 // 根据歌单ID获取歌单详情
-export const getRankingList = (id:string) => {
+export const getRankingList = (id: string) => {
     return Axios("/api/home/getSongCollectionDetail")
 }
 
@@ -91,6 +91,29 @@ export const getRankingList = (id:string) => {
 
 
 // 根据歌单ID获取歌单评论
-export const getCommentList = (id:string) => {
+export const getCommentList = (id: string) => {
     return Axios("/api/home/getSongCollectionComment")
+}
+
+
+// --------------------------------------------------------------------
+
+
+// 根据获取最近播放
+export const getHistory = () => {
+    return Axios("/api/home/history")
+}
+
+
+// --------------------------------------------------------------------
+
+
+// 我的收藏
+export const myCollection = {
+    getAlbum() {
+        return Axios("/api/home/collection/album")
+    },
+    getSinger() {
+        return Axios("/api/home/collection/singer")
+    },
 }

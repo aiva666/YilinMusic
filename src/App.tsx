@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect, } from 'react';
-import { Route, Redirect, Switch,Link } from 'react-router-dom'
+import { Route, Redirect, Switch, Link } from 'react-router-dom'
 import routerConfig from './routes/index'
-import { Input, Row, Col, Menu } from 'antd';
+import { Input, Row, Col, Menu, Avatar } from 'antd';
 import {
   SearchOutlined,
   AppstoreOutlined,
@@ -68,13 +68,13 @@ const App: FC = () => {
         {
           id: '6-1',
           title: "最近播放",
-          key: "/6-1",
+          key: "/history",
           icon: <HistoryOutlined />,
         },
         {
           id: '6-2',
           title: "我的收藏",
-          key: "/6-2",
+          key: "/collection",
           icon: <FlagOutlined />,
         },
       ],
@@ -188,9 +188,24 @@ const App: FC = () => {
               <div className="logo">YiLinMusic</div>
             </Col>
             <Col span={19}>
-              <div className="search-wrapper">
-                <div>
-                  <Input size="middle" allowClear suffix={<SearchOutlined />} />
+              <div className='header-content'>
+                <div className="search-wrapper">
+                  <div>
+                    <Input size="middle" allowClear suffix={<SearchOutlined />} />
+                  </div>
+                </div>
+                <div className="user-wrapper">
+                  {
+                    true ?
+                      <span>登录/注册</span>
+                      :
+                      (
+                        <Link to="/">
+                           <Avatar size={30} style={{border:"1px solid #f0f0f0"}} src="https://joeschmoe.io/api/v1/random" />
+                          <span>Accompany</span>
+                        </Link>
+                      )
+                  }
                 </div>
               </div>
 

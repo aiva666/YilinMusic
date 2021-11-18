@@ -1,18 +1,18 @@
 /*
  * @Date: 2021-09-18 10:44:06
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-10 10:57:38
+ * @LastEditTime: 2021-11-18 14:34:02
  * @FilePath: \yilin-music\src\routes\index.ts
  */
 import Recommended from '../views/Recommended'
-
 import RankingList from '../views/RankingList'
 import RankingDetail from '../views/RankingList/Detail'
 import LatestMusic from '../views/LatestMusic'
 import SongCollection from '../views/SongCollection'
 import Singer from "../views/Singer"
 import SingerDetail from '../views/Singer/SingerDetail'
-
+import Histroy from '@/views/History'
+import MineCollection from '@/views/MineCollection'
 const routes:Array<RouterParams> = [
     // 根路径重定向到个性推荐
     {
@@ -67,6 +67,20 @@ const routes:Array<RouterParams> = [
         path:"/singer-detail/:id",
         name:'singer-detail',
         component:SingerDetail,
+        exact:true,
+    },
+    {
+        title:"最近播放",
+        path:"/history",
+        name:'history',
+        component:Histroy,
+        exact:true,
+    },
+    {
+        title:"我的收藏",
+        path:"/collection",
+        name:'collection',
+        component:MineCollection,
         exact:true,
     },
 ]

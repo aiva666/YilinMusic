@@ -1,13 +1,38 @@
-
 $primaryColor:#d0344e;
 
 html {
-    --antd-wave-shadow-color:$primaryColor;
+    --antd-wave-shadow-color: $primaryColor;
 }
-blockquote, body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, hr, input, legend, li, ol, p, pre, td, textarea, th, ul {
-    margin: 0;
+
+blockquote,
+body,
+button,
+dd,
+dl,
+dt,
+fieldset,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+input,
+legend,
+li,
+ol,
+p,
+pre,
+td,
+textarea,
+th,
+ul {
+    margin : 0;
     padding: 0;
 }
+
 ul {
     list-style: none;
 }
@@ -21,14 +46,15 @@ ul {
 .anticon {
     color: #999;
 }
+
 .clearfix::after {
-    content:"";
-    display: block;
-    width: 0;
-    height: 0;
-    overflow: hidden;
+    content   : "";
+    display   : block;
+    width     : 0;
+    height    : 0;
+    overflow  : hidden;
     visibility: hidden;
-    clear: both;
+    clear     : both;
 }
 
 
@@ -47,20 +73,39 @@ ul {
             letter-spacing: 3px;
         }
 
-        .search-wrapper {
-            height: 40px;
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .search-wrapper {
+                height: 40px;
 
-            &>div {
-                width      : 400px;
-                height     : 100%;
-                display    : flex;
-                align-items: center;
+                &>div {
+                    width      : 400px;
+                    height     : 100%;
+                    display    : flex;
+                    align-items: center;
 
+                    &>span {
+                        border-radius: 24px;
+                    }
+                }
+            }
+            .user-wrapper {
+                margin-right: 26px;
                 &>span {
-                    border-radius: 24px;
+                    cursor: pointer;
+                }
+                &>a {
+                    span {
+                        margin-left: 10px;
+                        color:#333;
+                    }
                 }
             }
         }
+
+
     }
 
     &>main {
@@ -72,10 +117,12 @@ ul {
                 max-height   : calc(100vh - 100px);
                 overflow     : hidden;
                 padding-right: 2px;
+
                 &:hover {
                     overflow-y: auto;
                     overflow-x: hidden;
                 }
+
                 .ant-menu-item {
                     width: 216px;
                 }
@@ -132,21 +179,22 @@ ul {
 
 }
 
-.ant-table-thead > tr > th,
-.ant-table-tbody > tr > td {
+.ant-table-thead>tr>th,
+.ant-table-tbody>tr>td {
     border-bottom: none;
 }
 
 .songListDetail-table {
     th {
-        border:none;
+        border          : none;
         background-color: #fff !important;
-        color: rgb(150, 150, 150);
+        color           : rgb(150, 150, 150);
 
         &::before {
             display: none;
         }
     }
+
     .songListDetail-tableRow {
         * {
             color: rgb(150, 150, 150);

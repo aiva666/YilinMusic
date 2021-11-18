@@ -53,7 +53,7 @@ const SongTable = (props: PropsType) => {
     const columnsEnum:any = {
         'all': [index, action, title, singer, album, time,],
         'singer': [index, action, title, time,],
-        'simple': [index, action, title, singer, album, time,],
+        'simple': [index, title, singer, album, time,],
     }
 
     return (

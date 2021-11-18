@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-23 11:02:35
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-18 13:56:10
+ * @LastEditTime: 2021-11-18 14:48:50
  * @FilePath: \yilin-music\src\Mock\index.ts
  */
 import Mock, { } from 'mockjs'
@@ -59,7 +59,7 @@ Mock.mock("/api/home/getSongCollectionComment", "get", (ops: any) => {
     return mockResponse({
         "data":
         {
-            "total":32,
+            "total": 32,
             "hot|10": [
                 {
                     id: '@id',
@@ -256,7 +256,7 @@ Mock.mock("/api/home/singer/getSingerInfoById", "get", (ops: any) => {
             name: "@cname",
             song_count: 657,
             album_count: 21,
-            experience:"艾兰·沃克在英国北安普敦郡出生，两岁时随父母搬到挪威西南部的卑尔根，他从小就对电脑感兴趣，后来又被编程和平面设计吸引 。14岁时，他开始通过YouTube上的各类视频来学习音乐制作，并开始将自己所作的音乐发布在YouTube和Sound Cloud上。",
+            experience: "艾兰·沃克在英国北安普敦郡出生，两岁时随父母搬到挪威西南部的卑尔根，他从小就对电脑感兴趣，后来又被编程和平面设计吸引 。14岁时，他开始通过YouTube上的各类视频来学习音乐制作，并开始将自己所作的音乐发布在YouTube和Sound Cloud上。",
             "list|8": [
                 {
                     id: "@id",
@@ -277,5 +277,51 @@ Mock.mock("/api/home/singer/getSingerInfoById", "get", (ops: any) => {
 })
 
 
+// 最近播放-------------------------------
+
+// 获取最近播放列表
+Mock.mock("/api/home/history", "get", () => {
+    return mockResponse({
+        "data|100": [
+            {
+                song_name: "@ctitle",
+                song_singer: "@ctitle",
+                song_album: "@ctitle",
+                song_time: "@time(mm:ss)",
+                isSq: true,
+                id: "@id"
+            }
+        ]
+    })
+})
+
+
+// 我的收藏-------------------------------
+
+// 获取收藏专辑
+Mock.mock("/api/home/collection/album", "get", () => {
+    return mockResponse({
+        "data|10": [
+            {
+                id: "@id",
+                title: "@ctitle",
+                "image": "https://p4.music.126.net/a6VPApB8BSgcwlmT2RUOEA==/109951166432539305.jpg"
+            }
+        ]
+    })
+})
+
+// 获取收藏歌手
+Mock.mock("/api/home/collection/singer", "get", () => {
+    return mockResponse({
+        "data|10": [
+            {
+                id: "@id",
+                title: "@ctitle",
+                "image": "https://p4.music.126.net/a6VPApB8BSgcwlmT2RUOEA==/109951166432539305.jpg"
+            }
+        ]
+    })
+})
 
 
