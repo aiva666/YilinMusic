@@ -1,14 +1,14 @@
 /*
  * @Date: 2021-10-26 10:14:12
  * @LastEditors: Aiva
- * @LastEditTime: 2021-10-26 11:23:30
+ * @LastEditTime: 2021-11-18 10:41:42
  * @FilePath: \yilin-music\src\views\LatestMusic\index.tsx
  */
 import React, { FC, useState, useEffect } from 'react'
 
-import {latestMusic} from '../../openApi'
+import {latestMusic} from '@/openApi'
 
-import player from '../../assets/images/play-0.png'
+import player from '@/assets/images/play-0.png'
 import "./index.scss"
 
 

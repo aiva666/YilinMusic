@@ -1,14 +1,14 @@
 /*
  * @Date: 2021-09-23 09:58:36
  * @LastEditors: Aiva
- * @LastEditTime: 2021-10-13 10:23:40
+ * @LastEditTime: 2021-11-18 10:42:34
  * @FilePath: \yilin-music\src\views\Recommended\index.tsx
  */
 import React, { useState, useEffect } from 'react';
 
-import { recommendedApi } from '../../openApi'
+import { recommendedApi } from '@/openApi'
 import { Carousel,Row,Col } from 'antd';
-import Card from '../../Components/Card'
+import Card from '@/Components/Card'
 
 import "./index.scss"
 

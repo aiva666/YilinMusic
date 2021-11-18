@@ -14,6 +14,7 @@ import {
   CustomerServiceOutlined,
 } from '@ant-design/icons';
 
+import "./App.less"
 import "./App.scss"
 
 interface MenuConfigType {

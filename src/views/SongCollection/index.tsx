@@ -1,13 +1,13 @@
 /*
  * @Date: 2021-10-26 13:39:54
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-10 10:06:29
+ * @LastEditTime: 2021-11-18 10:43:19
  * @FilePath: \yilin-music\src\views\SongCollection\index.tsx
  */
 import React, { FC, useState, useEffect, } from 'react'
 import { Button, Row, Col } from 'antd'
-import Card from '../../Components/Card'
-import { songCollection } from '../../openApi/index'
+import Card from '@/Components/Card'
+import { songCollection } from '@/openApi/index'
 
 import "./index.scss"
 

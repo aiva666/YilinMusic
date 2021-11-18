@@ -1,13 +1,13 @@
 /*
  * @Date: 2021-09-24 10:27:53
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-09 13:22:00
+ * @LastEditTime: 2021-11-18 10:42:16
  * @FilePath: \yilin-music\src\views\RankingList\index.tsx
  */
 import React, { FC,useState,useEffect } from 'react'
 import {Link} from 'react-router-dom'
 
-import {rankingApi} from "../../openApi"
+import {rankingApi} from "@/openApi"
 import "./index.scss"
 
 

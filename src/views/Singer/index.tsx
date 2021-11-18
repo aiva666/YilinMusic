@@ -1,13 +1,13 @@
 /*
  * @Date: 2021-11-10 09:00:52
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-10 10:57:43
+ * @LastEditTime: 2021-11-18 10:42:49
  * @FilePath: \yilin-music\src\views\Singer\index.tsx
  */
 import React, { FC, useState, useEffect, ReactPropTypes } from 'react'
 import { Row, Col } from 'antd'
-import Card from '../../Components/Card'
-import { singer } from '../../openApi/index'
+import Card from '@/Components/Card'
+import { singer } from '@/openApi/index'
 import "./index.scss"
 
 const languageList = [

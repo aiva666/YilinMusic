@@ -1,15 +1,15 @@
 /*
  * @Date: 2021-11-10 10:37:42
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-11 10:26:00
+ * @LastEditTime: 2021-11-18 13:57:09
  * @FilePath: \yilin-music\src\views\Singer\SingerDetail\index.tsx
  */
 import React, { FC, useEffect, useState } from "react";
 import { Button, Tabs, } from 'antd'
-import SongTable from '../../../Components/SongTable'
+import SongTable from '@/Components/SongTable'
 import { PlusSquareOutlined, UserOutlined, PlayCircleOutlined } from '@ant-design/icons'
 import { numberToCapitalString } from '../../../utils'
-import { singer } from '../../../openApi'
+import { singer } from '@/openApi'
 import "./index.scss"
 
 const { TabPane } = Tabs
@@ -24,6 +24,7 @@ const SingerDetail: FC = (props: any) => {
         cover_img: "",
         name: "",
         song_count: 0,
+        experience:'',
         album_count: 0,
         list: [],
     }
@@ -94,7 +95,9 @@ const SingerDetail: FC = (props: any) => {
                         </ul>
                     </TabPane>
                     <TabPane tab="歌手详情" key="singer-desc">
-                        Content of Tab Pane 2
+                        <div>
+                            {singerInfo.experience}
+                        </div>
                     </TabPane>
                 </Tabs>
             </main>

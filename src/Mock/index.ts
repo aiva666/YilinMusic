@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-23 11:02:35
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-11 10:27:23
+ * @LastEditTime: 2021-11-18 13:56:10
  * @FilePath: \yilin-music\src\Mock\index.ts
  */
 import Mock, { } from 'mockjs'
@@ -48,6 +48,34 @@ Mock.mock("/api/home/getSongCollectionDetail", "get", (ops: any) => {
                     song_time: "@time(mm:ss)",
                     isSq: true,
                     id: "@id"
+                }
+            ]
+        }
+    })
+})
+
+// 根据歌单ID查询歌单评论
+Mock.mock("/api/home/getSongCollectionComment", "get", (ops: any) => {
+    return mockResponse({
+        "data":
+        {
+            "total":32,
+            "hot|10": [
+                {
+                    id: '@id',
+                    avatar: "https://joeschmoe.io/api/v1/random",
+                    name: "@name",
+                    date: '@date',
+                    content: '@title(10,60)',
+                }
+            ],
+            "latest|10": [
+                {
+                    id: '@id',
+                    avatar: "https://joeschmoe.io/api/v1/random",
+                    name: "@name",
+                    date: '@date',
+                    content: '@title(10,60)',
                 }
             ]
         }
@@ -228,12 +256,13 @@ Mock.mock("/api/home/singer/getSingerInfoById", "get", (ops: any) => {
             name: "@cname",
             song_count: 657,
             album_count: 21,
+            experience:"艾兰·沃克在英国北安普敦郡出生，两岁时随父母搬到挪威西南部的卑尔根，他从小就对电脑感兴趣，后来又被编程和平面设计吸引 。14岁时，他开始通过YouTube上的各类视频来学习音乐制作，并开始将自己所作的音乐发布在YouTube和Sound Cloud上。",
             "list|8": [
                 {
-                    id:"@id",
-                    "cover":"https://p4.music.126.net/a6VPApB8BSgcwlmT2RUOEA==/109951166432539305.jpg",
-                    release_time:"@date(yyyy-MM-dd)",
-                    "title":"@ctitle",
+                    id: "@id",
+                    "cover": "https://p4.music.126.net/a6VPApB8BSgcwlmT2RUOEA==/109951166432539305.jpg",
+                    release_time: "@date(yyyy-MM-dd)",
+                    "title": "@ctitle",
                     "data|6": [
                         {
                             song_name: "@ctitle",

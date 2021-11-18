@@ -1,32 +1,34 @@
 /*
  * @Date: 2021-10-13 15:03:43
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-11 09:26:25
+ * @LastEditTime: 2021-11-18 13:52:29
  * @FilePath: \yilin-music\src\Components\SongListDetail\index.tsx
  */
 import React, { FC, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Tag, Avatar, Button, Tabs, Input, Table } from 'antd'
-import { CaretRightOutlined, PlusSquareOutlined, ShareAltOutlined, SearchOutlined,HeartOutlined } from '@ant-design/icons';
+import { CaretRightOutlined, PlusSquareOutlined, ShareAltOutlined, SearchOutlined, HeartOutlined } from '@ant-design/icons';
 import SongTable from '../SongTable'
-import { getRankingList } from '../../openApi/index'
-import {numberToCapitalString} from '../../utils/index'
+import CommentBox from '../CommentBox';
+import { PaginationList, LoadMoreList } from '../CommentList'
+import { getRankingList, getCommentList } from '../../openApi/index'
+import { numberToCapitalString } from '../../utils/index'
 import "./index.scss"
-
 
 const { TabPane } = Tabs;
 
-
 const SongListDetail: FC = () => {
 
-    let defaultSongListInfo: SongListDetailResponseType = {
+    const defaultKey: string = 'list'
+    const [activeKey, setActiveKey] = useState(defaultKey)
+    const defaultSongListInfo: SongListDetailResponseType = {
         id: "",
         title: "",
-        cover_img:"",
+        cover_img: "",
         create_data: "",
         create_user_info: {
-            avatar:"",
-            name:""
+            avatar: "",
+            name: ""
         },
         collection_num: 0,
         share_num: 0,
@@ -38,8 +40,22 @@ const SongListDetail: FC = () => {
         list: []
     }
     const [songListInfo, setSongListInfo] = useState(defaultSongListInfo)
+    const defaultCommentList: commentListItemType[] = []
+    const [latestCommentList, setLatestCommentList] = useState(defaultCommentList)
+    const [hotCommentList, setHotCommentList] = useState(defaultCommentList)
+    const [latestCommentTotal, setLatestCommentTotal] = useState(0)
+    const [showHotComment, setShowHotcomment] = useState(true)
 
-    
+    useEffect(() => {
+        const reqMap: any = {
+            'list': getTableData,
+            'comment': getCommentData
+        }
+        if (activeKey) {
+            reqMap[activeKey]()
+        }
+    }, [activeKey])
+
 
     const getTableData = async () => {
         let res = await getRankingList('xxx')
@@ -48,9 +64,31 @@ const SongListDetail: FC = () => {
         }
     }
 
-    useEffect(() => {
-        getTableData()
-    }, [])
+    const getCommentData = async (page: number = 1) => {
+        let res = await getCommentList('xxx')
+        if (res) {
+            console.log(res)
+            setLatestCommentList(res.data.latest)
+            setHotCommentList(res.data.hot)
+            setLatestCommentTotal(res.data.total)
+            if(document) {
+                let dom = document.querySelector('.view-wrapper')
+                if(dom) {
+                    dom.scrollTop = 0
+                }
+                
+            }
+        }
+    }
+
+    const commentPageChange = (page: number) => {
+        if (page > 1) {
+            setShowHotcomment(false)
+        } else {
+            setShowHotcomment(true)
+        }
+        getCommentData(page)
+    }
 
 
     const rightExtra = (
@@ -61,7 +99,7 @@ const SongListDetail: FC = () => {
         <div className="rankDetail">
             <header>
                 <div className="view-icon">
-                    <div style={{backgroundImage:`url(${songListInfo.cover_img})`}}></div>
+                    <div style={{ backgroundImage: `url(${songListInfo.cover_img})` }}></div>
                 </div>
                 <div className="view-desc">
                     <h2>
@@ -82,7 +120,7 @@ const SongListDetail: FC = () => {
                         <span>标签：</span>
                         <span>
                             {
-                                songListInfo.tags.map((item,index) => {
+                                songListInfo.tags.map((item, index) => {
                                     return (
                                         <Link to="/" key={item.id}> <i>{index === 0 ? "" : ' / '}</i> {item.title}</Link>
                                     )
@@ -101,13 +139,32 @@ const SongListDetail: FC = () => {
                 </div>
             </header>
             <main>
-                <Tabs defaultActiveKey="list" tabBarExtraContent={{ right: rightExtra }} >
+                <Tabs activeKey={activeKey} onChange={(k) => {
+                    setActiveKey(k)
+                }} tabBarExtraContent={{ right: rightExtra }} >
                     <TabPane tab="歌曲列表" key="list">
                         <SongTable data={songListInfo.list} />
                         {/* <Table className="songListDetail-table" rowClassName="songListDetail-tableRow" rowKey="id" size="small" pagination={false} dataSource={songListInfo.list} columns={tableColumns} /> */}
                     </TabPane>
                     <TabPane tab={`评论（${numberToCapitalString(songListInfo.comment_count)})`} key="comment">
-                        Content of Tab Pane 2
+                        <div>
+                            <CommentBox />
+                        </div>
+                        <div>
+                            {/* {showHotComment ? <LoadMoreList data={hotCommentList} onChange={commentPageChange} /> : null} */}
+                            {
+                                showHotComment ?
+                                    <div>
+                                        <h3>热门评论</h3>
+                                        <PaginationList data={hotCommentList} page={false} />
+                                    </div>
+                                    : null
+                            }
+                            <div style={{ marginTop: 16 }}>
+                                <h3>最新评论</h3>
+                                <PaginationList data={latestCommentList} onChange={commentPageChange} total={latestCommentTotal} />
+                            </div>
+                        </div>
                     </TabPane>
                 </Tabs>
             </main>
