@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect, } from 'react';
-import { Route, Redirect, Switch, Link } from 'react-router-dom'
+import { Route, Redirect, Switch, Link, useHistory, useLocation } from 'react-router-dom'
 import routerConfig from './routes/index'
 import { Input, Row, Col, Menu, Avatar, Modal } from 'antd';
 import Login from '@/views/Login'
@@ -19,11 +19,13 @@ import {
   PlayCircleOutlined,
   StepBackwardOutlined,
   StepForwardOutlined,
+  LeftCircleOutlined,
+  RightCircleOutlined,
 } from '@ant-design/icons';
 import Draggable from 'react-draggable';
 import "./App.less"
 import "./App.scss"
-
+import LogoImg from '@/assets/images/logo.png'
 interface MenuConfigType {
   id: number | string,
   title: number | string,
@@ -33,7 +35,8 @@ interface MenuConfigType {
 }
 
 const App: FC = () => {
-
+  const history = useHistory()
+  const location = useLocation()
 
   // 菜单配置
   const menuConfig: MenuConfigType[] = [
@@ -46,7 +49,7 @@ const App: FC = () => {
     {
       id: "2",
       title: "排行榜",
-      key: "/ranking-list",
+      key: "/ranking",
       icon: <BarsOutlined />,
     },
     {
@@ -162,8 +165,29 @@ const App: FC = () => {
   let [pageRouters, setPageRouters] = useState<RouterParams[]>([])
 
   const [showLoginModal, setShowLoginModal] = useState(false)
-  const [showPlayerBox, setShowPlayerBox] = useState(true)
+  const [showPlayerBox, setShowPlayerBox] = useState(false)
 
+  // 搜索内容
+  const [keyWords, setKeyWords] = useState('')
+
+  // 选择的菜单
+  const [activeMenus, setActiveMenu] = useState(['/recommended'])
+
+
+  useEffect(() => {
+    initRedirectRouter(routerConfig)
+  }, [])
+
+  useEffect(() => {
+    // 只匹配一级菜单
+    let str = location.pathname
+    if (str.substr(1,).indexOf('/') < 0) {
+      setActiveMenu([location.pathname])
+    } else {
+      setActiveMenu([location.pathname.substr(0, location.pathname.lastIndexOf('/'))])
+    }
+
+  }, [location])
 
   // 获取重定向路由
   const initRedirectRouter = (arr: Array<RouterParams>): void => {
@@ -180,14 +204,13 @@ const App: FC = () => {
     setPageRouters(pageArray)
   }
 
-  // 菜单点击事件
-  const menuChangeHandler = (key: string): void => {
-    // props.history.push(key)
+  // 搜索
+  const toSearch = () => {
+    let val = keyWords
+    if (!val) return
+    history.push('/search?q=' + val)
   }
 
-  useEffect(() => {
-    initRedirectRouter(routerConfig)
-  }, [])
 
   return (
     <div className="App">
@@ -195,13 +218,28 @@ const App: FC = () => {
         <div className="container">
           <Row gutter={30}>
             <Col span={5}>
-              <div className="logo">YiLinMusic</div>
+              <div className="logo">
+                <img src={LogoImg} alt="YilinMusic" />
+                {/* <span>忆霖MUSIC</span> */}
+              </div>
             </Col>
             <Col span={19}>
               <div className='header-content'>
-                <div className="search-wrapper">
-                  <div>
-                    <Input size="middle" allowClear suffix={<SearchOutlined />} />
+                <div className="header-content-start">
+                  <LeftCircleOutlined onClick={() => { history.go(-1) }} />
+                  <RightCircleOutlined onClick={() => { history.go(1) }} />
+                  <div className="search-wrapper">
+                    <div>
+                      <Input
+                        size="middle"
+                        placeholder="请输入歌曲名"
+                        allowClear
+                        value={keyWords}
+                        onChange={(e) => { setKeyWords(e.target.value) }}
+                        suffix={<SearchOutlined style={{ cursor: 'pointer' }} onClick={toSearch} />}
+                        onPressEnter={toSearch}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className="user-wrapper">
@@ -228,7 +266,9 @@ const App: FC = () => {
           <Row gutter={30}>
             <Col span={5}>
               <div className="menu-wrapper">
-                <Menu defaultSelectedKeys={['/recommended']} onClick={({ key }) => { menuChangeHandler(key) }}>
+                <Menu
+                  selectedKeys={activeMenus}
+                >
                   {
                     menuConfig.map(item => {
                       return (

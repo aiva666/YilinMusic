@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-24 10:27:53
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-18 10:42:16
+ * @LastEditTime: 2021-11-26 14:29:26
  * @FilePath: \yilin-music\src\views\RankingList\index.tsx
  */
 import React, { FC,useState,useEffect } from 'react'
@@ -66,7 +66,7 @@ const RankingList: FC = () => {
                                             })
                                         }
                                         <div className="rank-list-item">
-                                            <Link style={{color:"#999"}} to="/ranking-detail">查看全部{" >"}</Link>
+                                            <Link style={{color:"#999"}} to="/ranking/detail">查看全部{" >"}</Link>
                                         </div>
                                     </div>
                                 </li>

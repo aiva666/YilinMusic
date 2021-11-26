@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-18 10:44:06
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-23 10:34:30
+ * @LastEditTime: 2021-11-26 14:34:08
  * @FilePath: \yilin-music\src\routes\index.ts
  */
 import Recommended from '../views/Recommended'
@@ -16,6 +16,8 @@ import MineCollection from '@/views/MineCollection'
 
 import Profile from '@/views/Profile'
 import ProfileEdit from '@/views/Profile/Edit'
+
+import Result from '@/views/Result'
 const routes:Array<RouterParams> = [
     // 根路径重定向到个性推荐
     {
@@ -33,16 +35,20 @@ const routes:Array<RouterParams> = [
     // 排行榜
     {
         title:"排行榜",
-        path:"/ranking-list",
-        name:'ranking-list',
-        component:RankingList
+        path:"/ranking",
+        name:'ranking',
+        component:RankingList,
+        exact:true,
+        strict:true,
     },
     // 排行榜详情
     {
         title:"排行榜详情",
-        path:"/ranking-detail",
-        name:'ranking-detail',
-        component:RankingDetail
+        path:"/ranking/detail",
+        name:'ranking/detail',
+        component:RankingDetail,
+        exact:true,
+        strict:true,
     },
     // 最新音乐
     {
@@ -101,6 +107,15 @@ const routes:Array<RouterParams> = [
         path:"/profile/edit",
         name:'profile/edit',
         component:ProfileEdit,
+        exact:true,
+    },
+
+    // 搜索
+    {
+        title:"搜索结果",
+        path:"/search",
+        name:'search',
+        component:Result,
         exact:true,
     },
 ]
