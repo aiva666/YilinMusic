@@ -6,7 +6,7 @@ import { Table } from 'antd'
 
 interface PropsType {
     data: SongListDetailListType[],
-    type?: 'all' | "singer" | 'simple'
+    type?: 'all' | "singer" | 'simple' | 'playList'
 }
 
 const SongTable = (props: PropsType) => {
@@ -50,14 +50,24 @@ const SongTable = (props: PropsType) => {
         dataIndex: 'song_time',
     }
 
-    const columnsEnum:any = {
+    const columnsEnum: any = {
         'all': [index, action, title, singer, album, time,],
         'singer': [index, action, title, time,],
         'simple': [index, title, singer, album, time,],
+        'playList': [title, singer, time,],
     }
 
     return (
-        <Table showHeader={ props.type !== 'singer'} className="songListDetail-table" rowClassName="songListDetail-tableRow" rowKey="id" size="small" pagination={false} dataSource={props.data} columns={columnsEnum[(props.type || 'all')]} />
+        <Table
+            showHeader={(props.type !== 'singer') && (props.type !== 'playList')}
+            className="songListDetail-table"
+            rowClassName="songListDetail-tableRow"
+            rowKey="id"
+            size="small"
+            pagination={false}
+            dataSource={props.data}
+            columns={columnsEnum[(props.type || 'all')]}
+        />
     )
 }
 

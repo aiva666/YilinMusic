@@ -1,0 +1,31 @@
+.login-wrapper {
+    &>h2 {
+        padding:16px 26px;
+        border-bottom: 1px solid #f0f0f0;
+        text-align: center;
+        color:#999;
+        font-size: 24px;
+        letter-spacing: 2px;
+    }
+    .form-box {
+        padding: 26px;
+        .form-end {
+            display:flex;
+            justify-content:space-between;
+            align-items: center;
+            font-size:12px;
+            &>div>span {
+                cursor: pointer;
+                &:hover {
+                    color:#d0344e;
+                }
+            }
+        }
+        .ant-input-affix-wrapper {
+            border-radius: 24px;
+            &,input {
+                background-color: #f0f0f0;
+            }
+        }
+    }
+}

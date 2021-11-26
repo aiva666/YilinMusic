@@ -1,7 +1,9 @@
 import React, { FC, useState, useEffect, } from 'react';
 import { Route, Redirect, Switch, Link } from 'react-router-dom'
 import routerConfig from './routes/index'
-import { Input, Row, Col, Menu, Avatar } from 'antd';
+import { Input, Row, Col, Menu, Avatar, Modal } from 'antd';
+import Login from '@/views/Login'
+import Player from './views/Player';
 import {
   SearchOutlined,
   AppstoreOutlined,
@@ -12,8 +14,13 @@ import {
   HistoryOutlined,
   FlagOutlined,
   CustomerServiceOutlined,
+  HeartOutlined,
+  ExpandOutlined,
+  PlayCircleOutlined,
+  StepBackwardOutlined,
+  StepForwardOutlined,
 } from '@ant-design/icons';
-
+import Draggable from 'react-draggable';
 import "./App.less"
 import "./App.scss"
 
@@ -154,6 +161,9 @@ const App: FC = () => {
   // 页面路由
   let [pageRouters, setPageRouters] = useState<RouterParams[]>([])
 
+  const [showLoginModal, setShowLoginModal] = useState(false)
+  const [showPlayerBox, setShowPlayerBox] = useState(true)
+
 
   // 获取重定向路由
   const initRedirectRouter = (arr: Array<RouterParams>): void => {
@@ -196,12 +206,12 @@ const App: FC = () => {
                 </div>
                 <div className="user-wrapper">
                   {
-                    true ?
-                      <span>登录/注册</span>
+                    false ?
+                      <span onClick={() => { setShowLoginModal(true) }}>登录/注册</span>
                       :
                       (
-                        <Link to="/">
-                           <Avatar size={30} style={{border:"1px solid #f0f0f0"}} src="https://joeschmoe.io/api/v1/random" />
+                        <Link to="/profile">
+                          <Avatar size={30} style={{ border: "1px solid #f0f0f0" }} src="https://joeschmoe.io/api/v1/random" />
                           <span>Accompany</span>
                         </Link>
                       )
@@ -262,6 +272,64 @@ const App: FC = () => {
           </Row>
         </div>
       </main>
+
+      <Modal
+        destroyOnClose
+        bodyStyle={{ padding: 0 }}
+        wrapClassName="login-modal"
+        closable={false}
+        visible={showLoginModal}
+        width={500}
+        footer={null}
+        onCancel={() => { setShowLoginModal(false) }}
+      >
+        <Login />
+      </Modal>
+
+      <Draggable
+        axis="both"
+        handle=".handle"
+        // offsetParent={document.body}
+        // bounds={"parent"}
+        defaultPosition={{ x: window.innerWidth / 10, y: -200 }}
+        grid={[1, 1]}
+        scale={1}
+
+      >
+        <div className="player-control handle" >
+          <div>
+            <div className="song-cover">
+              <img src="https://p4.music.126.net/a6VPApB8BSgcwlmT2RUOEA==/109951166432539305.jpg" alt="xxxxx" />
+            </div>
+            <div className="player-action">
+              <p>There For You - Martin Garrix / Troye Sivan</p>
+              <div>
+                <StepBackwardOutlined />
+                <PlayCircleOutlined />
+                <StepForwardOutlined />
+              </div>
+            </div>
+            <div className="song-action">
+              <HeartOutlined />
+              <ExpandOutlined onClick={() => {
+                setShowPlayerBox(true)
+              }} />
+            </div>
+          </div>
+        </div>
+      </Draggable>
+
+      <Modal
+        wrapClassName="player-modal"
+        width={1000}
+        visible={showPlayerBox}
+        footer={null}
+        onCancel={() => { setShowPlayerBox(false) }}
+        destroyOnClose
+      >
+        <Player />
+      </Modal>
+
     </div>
   );
 }

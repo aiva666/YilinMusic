@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-11-18 08:48:58
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-18 09:10:41
+ * @LastEditTime: 2021-11-23 15:21:54
  * @FilePath: \yilin-music\src\Components\CommentBox\index.tsx
  */
 import React, { FC, useState } from 'react'
@@ -9,8 +9,11 @@ import { Input, Button } from 'antd'
 
 import "./index.scss"
 
+interface PropsType {
+    onSubmit?:(val:string) => void
+}
 
-const CommentBox: FC = (props:any) => {
+const CommentBox: FC<PropsType> = (props:PropsType) => {
 
     const [value, setValue] = useState('')
 

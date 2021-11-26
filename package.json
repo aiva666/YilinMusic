@@ -52,6 +52,7 @@
   "devDependencies": {
     "@craco/craco": "^6.4.0",
     "@types/mockjs": "^1.0.4",
-    "mockjs": "^1.1.0"
+    "mockjs": "^1.1.0",
+    "react-draggable": "^4.4.4"
   }
 }
