@@ -1,10 +1,11 @@
 /*
  * @Date: 2021-09-23 10:51:10
  * @LastEditors: Aiva
- * @LastEditTime: 2021-12-21 12:47:21
+ * @LastEditTime: 2021-12-21 14:06:46
  * @FilePath: \yilin-music\src\openApi\index.ts
  */
 
+import { AxiosRequestConfig } from 'axios'
 import Axios from '../utils/Axios'
 
 // 个性推荐
@@ -99,9 +100,9 @@ export const getCommentList = (id: string,offset:number = 0) => {
 // --------------------------------------------------------------------
 
 
-// 根据获取最近播放
+// 获取最近播放
 export const getHistory = () => {
-    return Axios("/api/home/history")
+    return Axios("/record/recent/song")
 }
 
 
@@ -111,9 +112,26 @@ export const getHistory = () => {
 // 我的收藏
 export const myCollection = {
     getAlbum() {
-        return Axios("/api/home/collection/album")
+        return Axios("/album/sublist")
     },
     getSinger() {
-        return Axios("/api/home/collection/singer")
+        return Axios("/artist/sublist")
     },
+}
+
+// --------------------------------------------------------------------
+
+
+// 登录
+export const login = (params:AxiosRequestConfig) => {
+    return Axios(`/login/cellphone`,params)
+}
+
+
+// --------------------------------------------------------------------
+
+
+// 用户歌单
+export const getUserPlayList = (id:number) => {
+    return Axios(`/user/playlist?uid=${id}`)
 }

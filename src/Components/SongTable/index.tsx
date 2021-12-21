@@ -1,7 +1,7 @@
 
 import React from "react";
 import { HeartOutlined } from '@ant-design/icons'
-
+import {transformTime} from "@/utils"
 import { Table } from 'antd'
 
 interface PropsType {
@@ -46,11 +46,15 @@ const SongTable = (props: PropsType) => {
     const album = {
         title: "专辑",
         dataIndex: ["al",'name'],
+        ellipsis:true
     }
     const time = {
         title: "时间",
         align: "center" as "center",
         dataIndex: 'dt',
+        render(_:any,item:any) {
+            return transformTime(item.dt)
+        }
     }
 
     const columnsEnum: any = {

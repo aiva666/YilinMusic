@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-10-13 15:03:43
  * @LastEditors: Aiva
- * @LastEditTime: 2021-12-21 12:37:03
+ * @LastEditTime: 2021-12-21 14:26:42
  * @FilePath: \yilin-music\src\Components\SongListDetail\index.tsx
  */
 import React, { FC, useState, useEffect } from "react";
@@ -18,7 +18,8 @@ import SongTable from "../SongTable";
 import CommentBox from "../CommentBox";
 import { PaginationList, LoadMoreList } from "../CommentList";
 import { getRankingList, getCommentList } from "../../openApi/index";
-import { numberToCapitalString } from "../../utils/index";
+import { numberToCapitalString ,} from "../../utils/index";
+import Moment from 'moment'
 import "./index.scss";
 
 const { TabPane } = Tabs;
@@ -66,7 +67,7 @@ const SongListDetail: FC<TProps> = (props: TProps) => {
         if (activeKey) {
             reqMap[activeKey]();
         }
-    }, [activeKey]);
+    }, [activeKey,id]);
 
     const getTableData = async () => {
         let res: any = await getRankingList(id);
@@ -131,7 +132,7 @@ const SongListDetail: FC<TProps> = (props: TProps) => {
                             {songListInfo.creator?.nickname}
                         </Link>
                         <span className="normal-left">
-                            {songListInfo.creator?.nickname}创建
+                            {Moment(songListInfo.createTime).format('yyyy-MM-DD')}创建
                         </span>
                     </div>
                     <div>
@@ -196,7 +197,7 @@ const SongListDetail: FC<TProps> = (props: TProps) => {
                     </div>
                     <div>
                         <span>简介：</span>
-                        <span>{songListInfo.description}</span>
+                        <span>{songListInfo.description || "暂无"}</span>
                     </div>
                 </div>
             </header>

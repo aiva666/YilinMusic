@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-11-18 14:09:31
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-18 14:53:05
+ * @LastEditTime: 2021-12-21 13:39:29
  * @FilePath: \yilin-music\src\views\MineCollection\index.tsx
  */
 import React, { FC, useEffect, useState } from "react";
@@ -55,7 +55,7 @@ const MineCollection: FC = () => {
                         {
                             albumList.map((item: any) => {
                                 return <Col span={4} key={item.id} style={{marginBottom:16}}>
-                                    <Card title={item.title} hideCount image={item.image} />
+                                    <Card title={item.name} hideCount image={item.picUrl} />
                                 </Col>
                             })
                         }
@@ -66,7 +66,7 @@ const MineCollection: FC = () => {
                         {
                             singerList.map((item: any) => {
                                 return <Col span={4} key={item.id} style={{marginBottom:16}}>
-                                    <Card title={item.title} hideCount image={item.image} />
+                                    <Card title={item.name} hideCount image={item.picUrl} />
                                 </Col>
                             })
                         }

@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-11-23 10:32:35
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-23 13:06:06
+ * @LastEditTime: 2021-12-21 14:39:33
  * @FilePath: \yilin-music\src\views\Profile\Edit\index.tsx
  */
 import React, { FC, useRef, } from 'react'
@@ -28,7 +28,7 @@ const EditProfile: FC = () => {
             },
         ],
     }
-
+    let p = JSON.parse(localStorage.getItem("profile") as string);
     const onSave = () => {
         
     }
@@ -66,7 +66,7 @@ const EditProfile: FC = () => {
                     </Form>
                 </section>
                 <section>
-                    <img src="https://p4.music.126.net/a6VPApB8BSgcwlmT2RUOEA==/109951166432539305.jpg" alt="Accompany" />
+                    <img src={p.avatarUrl} alt="Accompany" />
                     <Upload>
                         <Button type="default" shape="round">修改头像</Button>
                     </Upload>

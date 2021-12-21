@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-11-18 14:09:31
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-18 14:27:36
+ * @LastEditTime: 2021-12-21 13:34:33
  * @FilePath: \yilin-music\src\views\History\index.tsx
  */
 import React, { FC, useEffect, useState } from "react";
@@ -18,7 +18,11 @@ const Histroy: FC = () => {
         let res = await getHistory()
 
         if(res) {
-            setList(res.data)
+            setList(res.data.list.map((item:any) => {
+                return {
+                    ...item.data
+                }
+            }))
         }
     }
 
