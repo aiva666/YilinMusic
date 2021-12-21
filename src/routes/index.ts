@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-18 10:44:06
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-26 14:34:08
+ * @LastEditTime: 2021-12-21 12:06:16
  * @FilePath: \yilin-music\src\routes\index.ts
  */
 import Recommended from '../views/Recommended'
@@ -44,7 +44,7 @@ const routes:Array<RouterParams> = [
     // 排行榜详情
     {
         title:"排行榜详情",
-        path:"/ranking/detail",
+        path:"/ranking/detail/:id",
         name:'ranking/detail',
         component:RankingDetail,
         exact:true,

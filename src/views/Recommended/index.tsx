@@ -1,13 +1,13 @@
 /*
  * @Date: 2021-09-23 09:58:36
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-18 10:42:34
+ * @LastEditTime: 2021-12-21 11:15:29
  * @FilePath: \yilin-music\src\views\Recommended\index.tsx
  */
 import React, { useState, useEffect } from 'react';
 
 import { recommendedApi } from '@/openApi'
-import { Carousel,Row,Col } from 'antd';
+import { Carousel,Row,Col, } from 'antd';
 import Card from '@/Components/Card'
 
 import "./index.scss"
@@ -24,17 +24,17 @@ const Recommended = () => {
 
     // 获取轮播图数据
     const getSwiper = async () => {
-        let res = await getSwiperList()
+        let res:any = await getSwiperList()
         if (res) {
-            setSwiperList(res.data)
+            setSwiperList(res.banners)
         }
     }
 
     // 获取推荐歌单数据
     const getCollection = async () => {
-        let res = await getCollectionList()
+        let res:any = await getCollectionList()
         if (res) {
-            setCollection(res.data)
+            setCollection(res.result)
         }
     }
 
@@ -51,8 +51,8 @@ const Recommended = () => {
                     {
                         swiperList.map((item:any) => {
                             return (
-                                <div key={item.id} className="swiper-item">
-                                    <img src={item.image} alt={item.title} />
+                                <div key={item.targetId} className="swiper-item">
+                                    <img src={item.imageUrl} alt={item.typeTitle} />
                                 </div>
                             )
                         })
@@ -67,7 +67,7 @@ const Recommended = () => {
                         collection.map((item:any) => {
                             return (
                                 <Col span={4} key={item.id} style={{marginBottom:16}}>
-                                    <Card title={item.title} image={item.image} count={item.count} />
+                                    <Card title={item.name} image={item.picUrl} count={item.playCount} />
                                 </Col>
                             )
                         })

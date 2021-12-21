@@ -5,11 +5,15 @@
 
     .play-count {
         position   : absolute;
-        right      : 6px;
+        width: 100%;
+        text-align: right;
+        left      : 0;
         top        : 0;
         color      : #fff;
         line-height: 20px;
+        padding:0 6px;
         font-size  : 12px;
+        background-image:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.01)) 
     }
 
     img {

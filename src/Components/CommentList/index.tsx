@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-11-18 10:57:26
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-18 13:45:41
+ * @LastEditTime: 2021-12-21 12:34:47
  * @FilePath: \yilin-music\src\Components\CommentList\index.tsx
  */
 import React, { FC, useState } from "react";
@@ -34,7 +34,7 @@ export const PaginationList = (props:any) => {
                 }}
                 dataSource={listData}
                 footer={null}
-                renderItem={item => (
+                renderItem={(item:any) => (
                     <List.Item
                         key={item.id}
                         actions={[
@@ -42,9 +42,9 @@ export const PaginationList = (props:any) => {
                         ]}
                     >
                         <List.Item.Meta
-                            avatar={<Avatar src={item.avatar} />}
-                            title={item.name}
-                            description={item.date}
+                            avatar={<Avatar src={item.user.avatarUrl} />}
+                            title={item.user.nickname}
+                            description={item.timeStr}
                         />
                         {item.content}
                     </List.Item>

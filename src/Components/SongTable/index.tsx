@@ -32,22 +32,25 @@ const SongTable = (props: PropsType) => {
     const title = {
         title: "标题",
         width: 360,
-        dataIndex: 'song_name',
+        dataIndex: 'name',
         className: "song_title",
 
     }
     const singer = {
         title: "歌手",
-        dataIndex: 'song_singer',
+        dataIndex: ["ar",'name'],
+        render(_:any,item:any) {
+            return item['ar'][0]['name']
+        }
     }
     const album = {
         title: "专辑",
-        dataIndex: 'song_album',
+        dataIndex: ["al",'name'],
     }
     const time = {
         title: "时间",
         align: "center" as "center",
-        dataIndex: 'song_time',
+        dataIndex: 'dt',
     }
 
     const columnsEnum: any = {

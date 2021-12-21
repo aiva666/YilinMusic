@@ -8,14 +8,15 @@
 
                 .rank-title {
                     &>div {
-                        width          : 150px;
-                        height         : 150px;
+                        width          : 100px;
+                        height         : 100px;
                         border-radius  : 8px;
                         display        : flex;
                         align-items    : center;
                         justify-content: center;
                         text-align     : center;
                         color          : #fff;
+                        background:no-repeat 0 0/cover;
 
                     }
 

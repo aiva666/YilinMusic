@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-24 10:27:53
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-26 14:29:26
+ * @LastEditTime: 2021-12-21 12:06:27
  * @FilePath: \yilin-music\src\views\RankingList\index.tsx
  */
 import React, { FC,useState,useEffect } from 'react'
@@ -22,9 +22,9 @@ const RankingList: FC = () => {
 
     // 获取排行榜列表数据
     const getRankList = async () => {
-        let res = await getRankingList()
+        let res:any = await getRankingList()
         if(res) {
-            setRankList(res.data)
+            setRankList(res.list.slice(0,4))
         }
     }
 
@@ -38,35 +38,35 @@ const RankingList: FC = () => {
             <div className="rank-wrapper">
                 <ul>
                     {
-                        rankList.map((item:rankListType, index) => {
+                        rankList.map((item:any, index) => {
                             return (
                                 <li key={item.id}>
                                     <div className="rank-title">
-                                        <div>
+                                        <div style={{backgroundImage:`url(${item.coverImgUrl})`}}>
                                             <div>
-                                                <h2>{item.title}</h2>
-                                                <p>{item.updateTime}更新</p>
+                                                {/* <h2>{item.name}</h2> */}
+                                                {/* <p>{item.updateFrequency}</p> */}
                                             </div>
                                         </div>
                                     </div>
                                     <div className="rank-list">
                                         {
-                                            item.list.map((i:rankListItemType, ind) => {
+                                            item.tracks.map((i:any, ind:number) => {
                                                 return (
                                                     <div className="rank-list-item" key={i.id}>
                                                         <div>
                                                             <span className="song-index">{ind + 1}</span>
-                                                            <span className="song-name">{i.song_name}</span>
+                                                            <span className="song-name">{i.first}</span>
                                                         </div>
                                                         <div>
-                                                            <span className="song-singer">{i.singer}</span>
+                                                            <span className="song-singer">{i.second}</span>
                                                         </div>
                                                     </div>
                                                 )
                                             })
                                         }
                                         <div className="rank-list-item">
-                                            <Link style={{color:"#999"}} to="/ranking/detail">查看全部{" >"}</Link>
+                                            <Link style={{color:"#999"}} to={`/ranking/detail/${item.id}`}>查看全部{" >"}</Link>
                                         </div>
                                     </div>
                                 </li>

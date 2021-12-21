@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-10-26 10:14:12
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-18 10:41:42
+ * @LastEditTime: 2021-12-21 11:21:16
  * @FilePath: \yilin-music\src\views\LatestMusic\index.tsx
  */
 import React, { FC, useState, useEffect } from 'react'
@@ -43,9 +43,9 @@ const LatestMusic: FC = () => {
     ]
 
     const getList = async () => {
-        let res  = await latestMusic.getLatestMusicListByType()
-        if(res && res.data) {
-            setSongList(res.data)
+        let res:any  = await latestMusic.getLatestMusicListByType()
+        if(res) {
+            setSongList(res.data.slice(0,20))
         }
     }
 
@@ -73,13 +73,13 @@ const LatestMusic: FC = () => {
                             return <li key={item.id}>
                                 <div>
                                     <div className="index">{index + 1}</div>
-                                    <div className="song-cover" style={{backgroundImage:`url(${item.cover})`}}>
-                                        <img src={player} alt="" />
+                                    <div className="song-cover" style={{backgroundImage:`url(${item.album.blurPicUrl})`}}>
+                                        <img src={item.album.blurPicUrl} alt={item.name} />
                                     </div>
-                                    <div className="song-name">{item.song_name}</div>
-                                    <div className="singer">{item.singer}</div>
-                                    <div className="song-album">{item.album}</div>
-                                    <div className="song-time">{item.song_time}</div>
+                                    <div className="song-name">{item.name}</div>
+                                    <div className="singer">{'-'}</div>
+                                    <div className="song-album">{'-'}</div>
+                                    <div className="song-time">{'-'}</div>
                                 </div>
                             </li>
                         })

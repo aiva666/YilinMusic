@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-10-26 13:39:54
  * @LastEditors: Aiva
- * @LastEditTime: 2021-11-18 10:43:19
+ * @LastEditTime: 2021-12-21 11:08:45
  * @FilePath: \yilin-music\src\views\SongCollection\index.tsx
  */
 import React, { FC, useState, useEffect, } from 'react'
@@ -20,7 +20,7 @@ const SongCollection: FC = () => {
     const [activeTagId, setActiveTagId] = useState(null)
     const [showModal, setShowModal] = useState(false)
 
-    const defaultTagData = {
+    const defaultTagData:any = {
         languages: [],
         style: [],
         scenario: [],
@@ -38,19 +38,38 @@ const SongCollection: FC = () => {
 
     // 获取分类
     const getTypeClass = async () => {
-        let res = await getSongCollectionClass()
+        let res:any = await getSongCollectionClass()
         if (res) {
-            setTagData(res.data)
-            setActiveTagId(res.data.hot[0]['id'])
+            let obj = {...defaultTagData}
+            
+            res.tags.forEach((item:any) => {
+                if(item.category === 0) {
+                    obj.languages.push(item)
+                    obj.hot.push(item)
+                }else if(item.category === 1) {
+                    obj.style.push(item)
+                }else if(item.category === 2) {
+                    obj.scenario.push(item)
+                }else if(item.category === 3) {
+                    obj.emotional.push(item)
+                }else if(item.category === 4) {
+                    obj.theme.push(item)
+                }
+            })
+            setTagData(obj)
+            setActiveTagId(res.tags[0]['id'])
         }
     }
 
 
     // 获取歌单列表
     const getSongCardList = async (id: string) => {
-        let res = await getSongCollectionById(id)
+        let res:any = await getSongCollectionById(id)
         if (res) {
-            setSongCardInfo(res.data)
+            setSongCardInfo({
+                good:res.playlists[0],
+                list:res.playlists.slice(1,)
+            })
         }
     }
 
@@ -76,10 +95,10 @@ const SongCollection: FC = () => {
         <div className="song-collection">
             <header>
                 <div className="header-container">
-                    <div className="mask" style={{ backgroundImage: `url(${songCardInfo.good.cover})` }}>
+                    <div className="mask" style={{ backgroundImage: `url(${songCardInfo.good.coverImgUrl})` }}>
                     </div>
                     <div className="cover">
-                        <img src={songCardInfo.good.cover} alt={songCardInfo.good.title} />
+                        <img src={songCardInfo.good.coverImgUrl} alt={songCardInfo.good.name} />
                     </div>
                     <div className="song-card-info">
                         <span className="song-card-flag">
@@ -87,8 +106,8 @@ const SongCollection: FC = () => {
                             <span>精品歌单</span>
                         </span>
                         <div>
-                            <p className="song-card-title">{songCardInfo.good.title}</p>
-                            <p className="song-card-desc">{songCardInfo.good.desc}</p>
+                            <p className="song-card-title">{songCardInfo.good.name}</p>
+                            <p className="song-card-desc">{songCardInfo.good.description}</p>
                         </div>
                     </div>
                 </div>
@@ -118,7 +137,7 @@ const SongCollection: FC = () => {
                                                     <span onClick={() => {
                                                         setActiveTagId(item.id)
                                                         setShowModal(false)
-                                                    }}>{item.title}</span>
+                                                    }}>{item.name}</span>
                                                 </Col>
                                             })
                                         }
@@ -137,7 +156,7 @@ const SongCollection: FC = () => {
                                                     <span onClick={() => {
                                                         setShowModal(false)
                                                         setActiveTagId(item.id)
-                                                    }}>{item.title}</span>
+                                                    }}>{item.name}</span>
                                                 </Col>
                                             })
                                         }
@@ -156,7 +175,7 @@ const SongCollection: FC = () => {
                                                     <span onClick={() => {
                                                         setShowModal(false)
                                                         setActiveTagId(item.id)
-                                                    }}>{item.title}</span>
+                                                    }}>{item.name}</span>
                                                 </Col>
                                             })
                                         }
@@ -175,7 +194,7 @@ const SongCollection: FC = () => {
                                                     <span onClick={() => {
                                                         setShowModal(false)
                                                         setActiveTagId(item.id)
-                                                    }}>{item.title}</span>
+                                                    }}>{item.name}</span>
                                                 </Col>
                                             })
                                         }
@@ -194,7 +213,7 @@ const SongCollection: FC = () => {
                                                     <span onClick={() => {
                                                         setShowModal(false)
                                                         setActiveTagId(item.id)
-                                                    }}>{item.title}</span>
+                                                    }}>{item.name}</span>
                                                 </Col>
                                             })
                                         }
@@ -208,7 +227,7 @@ const SongCollection: FC = () => {
                             tagData.hot.map((item: any) => {
                                 return <span key={item.id} onClick={() => {
                                     setActiveTagId(item.id)
-                                }} className={item.id === activeTagId ? 'active' : ''}>{item.title}</span>
+                                }} className={item.id === activeTagId ? 'active' : ''}>{item.name}</span>
                             })
                         }
 
@@ -220,7 +239,7 @@ const SongCollection: FC = () => {
                             songCardInfo.list?.map(item => {
                                 return (
                                     <Col span={4} key={item.id} style={{ marginBottom: 16 }}>
-                                        <Card title={item.title} image={item.image} count={"231432"} />
+                                        <Card title={item.name} image={item.coverImgUrl} count={item.playCount} />
                                     </Col>
                                 )
                             })
